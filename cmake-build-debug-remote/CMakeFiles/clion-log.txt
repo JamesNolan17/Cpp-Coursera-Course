@@ -1,0 +1,5 @@
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /tmp/tmp.DCkBkJFWOC
+debug1: permanently_set_uid: 0/0
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/tmp.DCkBkJFWOC/cmake-build-debug-remote

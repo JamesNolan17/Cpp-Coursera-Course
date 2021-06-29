@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/Peking_University_Cpp_Course.dir/week3.cpp.o  -o Peking_University_Cpp_Course 

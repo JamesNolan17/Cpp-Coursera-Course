@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="Docker Ubuntu (006dc4c6-c3a8-456a-bf29-46edc1e5b284)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/tmp.DCkBkJFWOC" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-remote" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="Docker Ubuntu (a58cfba7-e7a6-4607-952b-554700cdb530)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/Peking University C++ Course" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
