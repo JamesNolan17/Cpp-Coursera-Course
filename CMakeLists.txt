@@ -3,4 +3,4 @@ project(Peking_University_Cpp_Course)
 
 set(CMAKE_CXX_STANDARD 98)
 
-add_executable(Peking_University_Cpp_Course hw3_4.cpp)
+add_executable(Peking_University_Cpp_Course week4.cpp)
