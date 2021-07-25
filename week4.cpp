@@ -140,6 +140,36 @@ void CArray::push_back(int v) {
     ptr[size++] = v;
 }
 
+class Ostream{
+public:
+    Ostream & operator<<(int n){
+        return *this;
+    }
+};
+
+class CStudent{
+public:
+    int nAge;
+};
+
+Ostream &operator<<(Ostream& o, const CStudent &s){
+    o << s.nAge;
+    return o;
+}
+
+class ComplexTwo {
+    double real, imag;
+public:
+    ComplexTwo(double r=0, double i=0):real(r),imag(i){};
+    friend ostream &operator<<(ostream &is, const int n);
+
+};
+
+ostream &operator<<(ostream &is, const int n){
+    cout << n;
+    cout
+}
+
 
 int main() {
     Complex a(1, 2), b(2, 3), c, d;
@@ -178,6 +208,11 @@ int main() {
         cout << a4[i] << " ";
     }
     //End of length changeable list
+
+    Complex f;
+    int n;
+    cin >> f >> n;
+    cout << c << "," << n;
 
     return 0;
 }
