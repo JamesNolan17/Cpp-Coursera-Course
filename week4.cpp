@@ -181,6 +181,40 @@ ostream &operator<<(ostream &os, const ComplexTwo &c) {
     return os;
 }
 
+class CDemo {
+private:
+    int n;
+public:
+    CDemo(int i=0):n(i){};
+    CDemo operator++();
+    CDemo operator++(int); //
+    operator int() {return n;} //(int) s; s.int(); don't write return type because it is obvious.
+    friend CDemo operator--(CDemo &);
+    friend CDemo operator--(CDemo &, int);
+};
+
+CDemo CDemo::operator++() {
+    n++;
+    return * this;
+}
+
+CDemo CDemo::operator++(int) {
+    CDemo tmp(*this); //copy constructor
+    n++;
+    return tmp;
+}
+
+CDemo operator--(CDemo & d) {
+    d.n--;
+    return d;
+}
+
+CDemo operator--(CDemo & d, int) {
+    CDemo tmp(d);
+    d.n--;
+    return tmp;
+}
+
 
 istream &operator>>(istream &is, ComplexTwo &c) {
     string s;
@@ -236,5 +270,13 @@ int main() {
     int n;
     cin >> f >> n;
     cout << f << "," << n;
+
+    //i++ and ++i
+    CDemo dR(5);
+    cout << (dR++) << ",";
+    cout << (++dR) << ",";
+    cout << dR << ",";
+    cout << (dR--) << ",";
+    cout << (--dR) << ",";
     return 0;
 }
