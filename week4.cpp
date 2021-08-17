@@ -34,12 +34,13 @@ private:
     char *str;
 public:
     String() : str(NULL) {}
+
     //avoid s1 = hello; string s2(s1); causing shallow copy
-    String(String &s){
-        if(s.str){
-            str = new char[strlen(s.str)+1];
-            strcpy(str,s.str);
-        }else{
+    String(String &s) {
+        if (s.str) {
+            str = new char[strlen(s.str) + 1];
+            strcpy(str, s.str);
+        } else {
             str = NULL;
         }
     }
@@ -75,28 +76,30 @@ String::~String() {
     if (str) delete[] str;
 }
 
-class CArray{
+class CArray {
     int size; //Number of elements in list
     int *ptr; //point to the start address of dynamic allocate list
 public:
     CArray(int s = 0); //s stands for the elements in the list
-    CArray(CArray & a);
+    CArray(CArray &a);
+
     ~CArray();
+
     void push_back(int v); //add an element v at the end of the list
-    CArray & operator=(const CArray &a); //assign
-    int length() {return size;} //return the number of elements in the list
-    int & operator[](int i) {  //support n = a[i] and a[i] = 4
+    CArray &operator=(const CArray &a); //assign
+    int length() { return size; } //return the number of elements in the list
+    int &operator[](int i) {  //support n = a[i] and a[i] = 4
         return ptr[i]; //return value of a non-reference function cannot serve as the left value of =
     }
 };
 
-CArray::CArray(int s):size(s){
+CArray::CArray(int s) : size(s) {
     if (s == 0) ptr = nullptr;
     else ptr = new int[s];
 }
 
-CArray::CArray(CArray &a){
-    if (!a.ptr){
+CArray::CArray(CArray &a) {
+    if (!a.ptr) {
         ptr = nullptr;
         size = 0;
         return;
@@ -106,19 +109,19 @@ CArray::CArray(CArray &a){
     size = a.size;
 }
 
-CArray::~CArray(){
+CArray::~CArray() {
     if (ptr) delete[] ptr;
 }
 
-CArray &CArray::operator=(const CArray &a){
+CArray &CArray::operator=(const CArray &a) {
     if (ptr == a.ptr) return *this;
-    if (a.ptr == nullptr){
+    if (a.ptr == nullptr) {
         if (ptr) delete[] ptr;
         ptr = nullptr;
         size = 0;
         return *this;
     }
-    if (size < a.size){ //if the original array is big enough, no need to allocate
+    if (size < a.size) { //if the original array is big enough, no need to allocate
         if (ptr) delete[] ptr;
         ptr = new int[a.size];
     }
@@ -129,30 +132,30 @@ CArray &CArray::operator=(const CArray &a){
 
 //Low efficiency
 void CArray::push_back(int v) {
-    if (ptr){
-        int *tmpPtr = new int[size+1];
+    if (ptr) {
+        int *tmpPtr = new int[size + 1];
         memcpy(tmpPtr, ptr, sizeof(int) * size);
-        delete [] ptr;
+        delete[] ptr;
         ptr = tmpPtr;
-    }else{
+    } else {
         ptr = new int[1];
     }
     ptr[size++] = v;
 }
 
-class Ostream{
+class Ostream {
 public:
-    Ostream & operator<<(int n){
+    Ostream &operator<<(int n) {
         return *this;
     }
 };
 
-class CStudent{
+class CStudent {
 public:
     int nAge;
 };
 
-Ostream &operator<<(Ostream& o, const CStudent &s){
+Ostream &operator<<(Ostream &o, const CStudent &s) {
     o << s.nAge;
     return o;
 }
@@ -160,14 +163,34 @@ Ostream &operator<<(Ostream& o, const CStudent &s){
 class ComplexTwo {
     double real, imag;
 public:
-    ComplexTwo(double r=0, double i=0):real(r),imag(i){};
-    friend ostream &operator<<(ostream &is, const int n);
+    //ComplexTwo f;
+    //int n;
+    //cin >> f >> n;
+    //cout << c << "," << n;
+    //I: 13.2+133i 87
+    //O: 13.2+133i, 87
+    ComplexTwo(double r = 0, double i = 0) : real(r), imag(i) {};
 
+    friend ostream &operator<<(ostream &os, const ComplexTwo &c);
+
+    friend istream &operator>>(istream &is, ComplexTwo &c);
 };
 
-ostream &operator<<(ostream &is, const int n){
-    cout << n;
-    cout
+ostream &operator<<(ostream &os, const ComplexTwo &c) {
+    os << c.real << "+" << c.imag << "i";
+    return os;
+}
+
+
+istream &operator>>(istream &is, ComplexTwo &c) {
+    string s;
+    is >> s;
+    int pos = s.find("+",0);
+    string sTmp = s.substr(0,pos);
+    c.real = atof(sTmp.c_str());
+    sTmp = s.substr(pos+1, s.length()-pos-2);
+    c.imag = atof(sTmp.c_str());
+    return is;
 }
 
 
@@ -194,7 +217,7 @@ int main() {
     }
     CArray a2, a3;
     a2 = aa;
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < 5; i++) {
         cout << a2[i] << " ";
     }
     a2 = a3;
@@ -204,15 +227,14 @@ int main() {
     cout << endl;
     aa[3] = 100;
     CArray a4(aa);
-    for (int i = 0; i < a4.length(); i++){
+    for (int i = 0; i < a4.length(); i++) {
         cout << a4[i] << " ";
     }
     //End of length changeable list
 
-    Complex f;
+    ComplexTwo f;
     int n;
     cin >> f >> n;
-    cout << c << "," << n;
-
+    cout << f << "," << n;
     return 0;
 }
